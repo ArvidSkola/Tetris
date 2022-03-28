@@ -4,7 +4,7 @@ namespace Tetris
 {
     public abstract class Block
     {
-        protected abstract Posiition[][] Tiles { get; }
+        protected abstract Position[][] Tiles { get; }
         protected abstract Position StartOffset { get; }
         public abstract int Id { get; }
         private int RotationState;
