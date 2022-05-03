@@ -15,6 +15,8 @@ namespace Tetris
             new Position[] {new(2,0), new(2,1), new(2,2), new(2,3)},
             new Position[] {new(0,1), new(1,1), new(2,1), new(3,1)}
         };
+        //Även om I blocket bara har 2 posittioner när det roterar behövs det ändå en array med 4 positioner eftersom den går från att var på längden 
+        //till breden och sen till längden igen. Genom att ha dessa i följd emuleras detta i programet.//
         public override int Id => 1;
         protected override Position StartOffset => new Position(-1, 3);
        protected override Position[][] Tiles => tiles;
