@@ -1,5 +1,6 @@
 using System;
 namespace Tetris 
+    //Den här klassen kommer kombinera alla funktioner i de andra .cs klasserna för att hantera hur spelet ändras medans man spelar det.//
 {
     public class Game_State
     {
@@ -27,7 +28,7 @@ namespace Tetris
         public int Score { get; private set; }
         public Block Held_Blocks { get; private set; }
         public bool CanHold { get; private set; }
-
+//Här skapas variabler och booler som kommer hantera poängsystemet, förlust, sparade block och om man kan spara ett block eller inte.//
         public Game_State()
         {
             Grid = new Grd(22, 10);
@@ -48,6 +49,8 @@ namespace Tetris
             }
             return true;
         }
+        //Att veta om ett block får plats är viktigt för programet när spelaren ska placera blocken. Boolen kommer gå i genom alla rutor under blocket för att se om de 
+        // är tomma eller inte. Är minst en full kommer boolen retuneras som falsk annars retuneras den som san.//
         public void Hold_Block()
         {
             if (!CanHold)
@@ -61,6 +64,10 @@ namespace Tetris
             }
 
         }
+        //den här funktionen hanterar sparandet av blocken. I början av spelaet skapas en bol, CanHold som är avgörande för 
+        //denna funktionen. Om den är lika med falskt kommer man att retuneras och ens block kommer inte att ändras.
+        //Men om den är san kommer blocket Held_Block ändras till ditt nuvarande block och ett nytt kommer att skapas.
+        
         public void Block_Rotate_CW()
         {
             CurrentBlock.Rotate_CW();
@@ -93,6 +100,10 @@ namespace Tetris
                 CurrentBlock.Move_Block(0, -1);
             }
         }
+        //Dessa funktioner kommer att kopplas till vissa knappar på ditt tangentbord i en annan fil och kommer att styra ditt block.//
+        //När dessa kallas kommer de utföras så länge blocket inte får plats. Om detta är fallet kommer den motsats rörelsen ske. 
+         //Tex om du vill flytta ditt block åt höger men det får 
+        //inte plats kommer det flyttas åt vänster för att motverka detta.
 
         public bool Lose()
         {
@@ -129,6 +140,8 @@ namespace Tetris
                 Place_Block();
             }
         }
+        //Denna funktionen kommer att flytta ditt block nedåt och kommer både styras med knapptryck samt hända konstant under spelets gång.
+        //Precis som i de andra funktionerna som hanterade rörelse kommer den motsatta rörelsen ske om blocket inte får plats dvs det flyttas uppåt.
         private int TileDropDistance()
         {
             int drop = 0;
