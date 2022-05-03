@@ -1,5 +1,5 @@
 using System;
-
+//Här hanteras genereringen av blocken.//
 namespace Tetris
 {
     public class Block_Queue
@@ -15,12 +15,15 @@ namespace Tetris
             new S_Block()
 
         };
+        //Arrayen innehåller alla block, genom att använda Random funktionen kommer ett av blocken slumpas fram.//
         private readonly Random random = new Random();
         public Block Next_Block { get; private set; }
+        //Eftersom programet ska vissa inkomande block måste vi skapa ett sådant.//
         public Block_Queue()
         {
             Next_Block = RandomBlock();
         }
+       
         private Block RandomBlock()
         {
             return blocks[random.Next(blocks.Length)];
@@ -35,6 +38,8 @@ namespace Tetris
             while (block.Id == Next_Block.Id);
             return block;
         }
+        //Här genereras blocken genom att skapa ett Block,block, som sen returneras. I do while loopen sätts Next_Block som random block. 
+        //Loopen kommer att avbrytas när block id et inte längre är lika med Next_Blocks id. Då retuneras blocket.//
 
     }
 
