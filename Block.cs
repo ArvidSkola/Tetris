@@ -4,11 +4,13 @@ namespace Tetris
 {
     public abstract class Block
     {
+        //Varje block kommer att ha en position som hämtas från positions klassen, ett specifikt Id som är unikt för varje slags block.//
         protected abstract Position[][] Tiles { get; }
         protected abstract Position StartOffset { get; }
         public abstract int Id { get; }
         private int RotationState;
         private Position offset;
+        //Heltalet RotationState kommer att bestämma hur blocket roterar.//
 
         public Block()
         {
@@ -21,6 +23,7 @@ namespace Tetris
                 yield return new Position(p.Row + offset.Row, p.Column + offset.Column);
             }
         }
+        //Ett block kan rotera medurs och moturs, om ett block ska rotera
         public void Rotate_CW()
         {
             RotationState = (RotationState + 1) % Tiles.Lenght;
