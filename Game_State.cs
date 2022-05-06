@@ -34,8 +34,8 @@ namespace Tetris
             Grid = new Grd(22, 10);
             Block_Queue = new Block_Queue;
             CurrentBlock = Block_Queue.Generate_Block();
-            CanHold = true;
-            Held_Blocks = 0;
+             CanHold = true;
+            CanHold2 = true;
         }
 
         private bool BlockFits()
@@ -62,6 +62,28 @@ namespace Tetris
                 Held_Blocks = CurrentBlock;
                 CurrentBlock = Block_Queue.Generate_Block();
             }
+
+        }
+         public void Hold_Block2()
+        {
+            if (!CanHold2)
+            {
+                return;
+            }
+
+            if (Held_Block2 == null)
+            {
+                Held_Block2 = CurrentBlock;
+                CurrentBlock = Block_Queue.Generate_Block();
+            }
+            else
+            {
+                Block tmp = CurrentBlock;
+                CurrentBlock = Held_Block2;
+                Held_Block2 = tmp;
+            }
+
+            CanHold2 = false;
 
         }
         //den här funktionen hanterar sparandet av blocken. I början av spelaet skapas en bol, CanHold som är avgörande för 
@@ -110,25 +132,33 @@ namespace Tetris
             return !(Grid.RowEmpty(0) && Grid.RowEmpty(1));
         }
 
-        private void Place_Block()
+       private void Place_Block()
         {
-            foreach (Position p in CurrentBlock.TilesPositions())
+            foreach (Position p in CurrentBlock.TilePosistion())
             {
                 Grid[p.Row, p.Column] = CurrentBlock.Id;
             }
-
-            Score = +Grid.ClearFullRows();
+            if(!CanHold)
+            {
+                CanHold = true;
+            }
+            if(!CanHold2)
+            {
+                CanHold2 = true;
+            }
+            Score = Score + Grid.ClearFullRows();
 
             if (Lose())
             {
-                YouLose = true,
-        }
+                YouLose = true;
+            }
+           
             else
             {
-                CurrentBlock = Block_Queue.Generate_Block;
-                CanHold = true;
-            }
+                CurrentBlock = Block_Queue.Generate_Block();
+                
 
+            }
         }
 
         public void Block_Move_Down()
