@@ -213,6 +213,7 @@ namespace Tetris
         }
         public void CombineBlock()
         {
+            //Den här funktionen används till att kombinera block, den är endast tillgänglig om båda de sparade blocken är av samma sort//
            
             switch(Held_Block)
             {
@@ -220,7 +221,7 @@ namespace Tetris
                     Held_Block = CurrentBlock;
                     CurrentBlock = new I_Combo();
                     Held_Block2 = null;
-                    
+                   //I detta fallet kommer det nuvarande blocket sparas och bytas ut med motsvarande combo block, det andra sparadeblocket kommer nollställas.// 
                     break;
                 case O_Block:
                     Held_Block = CurrentBlock;
@@ -246,8 +247,6 @@ namespace Tetris
                     break;
             }
         }
-        
-
         
 
     }
